@@ -1,0 +1,113 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elegant Login</title>
+
+  <!-- Elegant serif font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: url('https://images.pexels.com/photos/1292998/pexels-photo-1292998.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 3rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #000;
+    }
+
+    .login-box input {
+      font-family: 'Fira Code', monospace; /* 👈 Different font here */
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+
+    .login-box button {
+      padding: 1rem 3rem;
+      background-color: #000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #333;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .login-box {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="login-box">
+    <h2>LOGIN</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p class="error-message" id="error"></p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const error = document.getElementById("error");
+
+      const validUser = {
+        username: "admin",
+        password: "123456"
+      };
+
+      if (username === validUser.username && password === validUser.password) {
+        alert("Login successful!");
+        window.location.href = "indexadmin.html";
+      } else {
+        error.textContent = "Invalid username or password!";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Galeri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f7;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    form input[type="file"],
+    form input[type="text"],
+    form button {
+      padding: 10px;
+      font-size: 14px;
+    }
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .item {
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      width: 220px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .item img {
+      max-width: 100%;
+      height: auto;
+    }
+    .item input {
+      width: 100%;
+      margin-top: 5px;
+      padding: 5px;
+    }
+    .item button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Admin Panel Galeri</h1>
+
+  <form id="upload-form">
+    <input type="file" name="image" required>
+    <input type="text" name="title" placeholder="Judul gambar" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  <div id="gallery">Memuat data...</div>
+
+  <script>
+    const galleryDiv = document.getElementById('gallery');
+    const form = document.getElementById('upload-form');
+
+    function loadGallery() {
+      fetch('/api/gallery')
+        .then(res => res.json())
+        .then(data => {
+          if (!data.length) {
+            galleryDiv.innerHTML = '<p>Belum ada gambar.</p>';
+            return;
+          }
+
+          galleryDiv.innerHTML = data.map(item => `
+            <div class="item" data-id="${item.id}">
+              <img src="${item.img}" alt="${item.title}">
+              <input type="text" value="${item.title}" onchange="updateTitle(${item.id}, this.value)">
+              <button onclick="deleteItem(${item.id})">Hapus</button>
+            </div>
+          `).join('');
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch('/api/gallery', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(() => {
+        form.reset();
+        loadGallery();
+      });
+    });
+
+    function updateTitle(id, title) {
+      fetch('/api/gallery/' + id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title })
+      }).then(loadGallery);
+    }
+
+    function deleteItem(id) {
+      fetch('/api/gallery/' + id, {
+        method: 'DELETE'
+      }).then(loadGallery);
+    }
+
+    loadGallery();
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 4,
+    "title": "Mona Lisa",
+    "img": "/uploads/photo-1.jpg"
+  },
+  {
+    "id": 8,
+    "title": "The Scream",
+    "img": "/uploads/photo-2.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Girl with a Pearl Earring",
+    "img": "/uploads/photo-3.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Self Potrait",
+    "img": "/uploads/photo-4.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Napoleon Crossing the Alps",
+    "img": "/uploads/photo-5.jpg"
+  },
+  {
+    "id": 12,
+    "title": "At Eternity's Gate",
+    "img": "/uploads/photo-6.jpeg"
+  },
+  {
+    "id": 13,
+    "title": "The Starry Night",
+    "img": "/uploads/photo-7.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Woman with a Parasol",
+    "img": "/uploads/photo-8.jpg"
+  },
+  {
+    "id": 15,
+    "title": "The Arnolfini Portrait",
+    "img": "/uploads/photo-9.jpg"
+  }
+]

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message Submitted</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      background: #f3f3f3;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Thank you for contacting us!</h2>
+    <p><strong>Name:</strong> <span id="name"></span></p>
+    <p><strong>Address:</strong> <span id="address"></span></p>
+    <p><strong>Message:</strong></p>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('name').textContent = decodeURIComponent(params.get('name') || '');
+    document.getElementById('address').textContent = decodeURIComponent(params.get('address') || '');
+    document.getElementById('message').textContent = decodeURIComponent(params.get('message') || '');
+  </script>
+</body>
+</html>
